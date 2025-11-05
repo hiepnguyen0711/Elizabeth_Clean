@@ -1,0 +1,111 @@
+---
+alwaysApply: false
+---
+# PHOTO HOKKAIDO - AI Development Rules
+
+## 🔄 MANDATORY WORKFLOW for Every Task
+
+### 1. Memory Bank Reading Protocol (REQUIRED)
+**BEFORE starting ANY task, MUST read ALL Memory Bank files in this order:**
+
+1. **memory-bank/projectbrief.md** - Project overview and objectives (Photo-Hokkaido services)
+2. **memory-bank/productContext.md** - Business context: Du lịch chụp ảnh Hokkaido, kimono yukata, tour Sapporo
+3. **memory-bank/systemPatterns.md** - Technical architecture: PHP routing, $d DB class
+4. **memory-bank/techContext.md** - Technology stack: PHP/MySQL, responsive photo gallery
+5. **memory-bank/designSystem.md** - Design guidelines: Futuristic 2025 black-white theme
+6. **memory-bank/activeContext.md** - Current work focus: Booking forms, album pages
+7. **memory-bank/progress.md** - Current status: Pages 80%, integrations pending
+8. **memory-bank/developmentWorkflow.md** - Development workflow: VAN/PLAN/CREATIVE/IMPLEMENT/QA
+9. **memory-bank/codebase-overview.md** - Codebase structure: sources/, templates/, admin/
+
+### 2. Sequential-Thinking Mandate (BẮT BUỘC)
+- **Bắt buộc sử dụng mcp_sequential-thinking cho TẤT CẢ tasks**: Phân tích vấn đề theo steps, estimate total thoughts, revise if needed, generate hypothesis và verify. Sử dụng cho planning, analysis, code implementation để đảm bảo structured thinking.
+
+### 3. Design System Compliance (MANDATORY)
+**EVERY piece of code MUST follow these design standards:**
+
+- **Primary Color:** #000000 (black) - main elements, CTAs, navigation
+- **Secondary Color:** red (red) - hover states, accents for photo themes
+- **Background:** #FFFFFF (Pure White) - clean, modern for image-focused site
+- **Typography:** 'Be Vietnam Pro', sans-serif - optimized for Vietnamese/English
+- **Style:** Futuristic 2025 with glassmorphism, black-white gradients, micro-animations for gallery
+- **Responsive:** Mobile-first, smooth transitions for photo viewing
+- **Effects:** Backdrop-filter blur, subtle shadows, image lazy-loading
+
+### 4. Code Development Standards
+```php
+// PHP Standards
+- Use custom $d database class for all operations (db_album for galleries, db_sanpham for services)
+- Follow routing through sources/index.php and file_router_index.php
+- Include error handling, Vietnamese/English comments
+- Consistent naming: page-hokkaido.php, album.php
+
+// CSS Standards  
+- Use custom properties from designSystem.md (black-white palette)
+- Glassmorphism for cards/galleries, image optimization
+- Mobile-first responsive, BEM for classes (e.g., .photo-gallery__item)
+- Lazy-load images for performance
+
+// JavaScript Standards
+- ES6+ syntax, progressive enhancement for booking forms
+- Error handling, accessibility (alt texts for photos)
+- Smooth animations for sliders/galleries (hcw-script.js)
+```
+
+### 5. Post-Task Memory Bank Update (MANDATORY)
+**AFTER completing ANY task, MUST update relevant Memory Bank files:**
+
+- **activeContext.md** - Update current focus (e.g., new album page)
+- **progress.md** - Mark completed (e.g., booking AJAX 100%)
+- **systemPatterns.md** - New patterns (e.g., photo upload flow)
+- **designSystem.md** - New components (e.g., gallery grid)
+- **codebase-overview.md** - Updated structure if files added
+
+### 6. MCP Tool Usage Requirements
+- **Bắt buộc mcp_sequential-thinking**: Cho mọi task để structured analysis.
+- **mcp_mysql**: Read schema trước DB ops, đặc biệt db_album, db_lienhe cho bookings.
+- **mcp_filesystem**: Access project files (sources/, templates/).
+- **mcp_interactive-feedback**: Xác nhận sau fixes/completions.
+- **mcp_rube**: Nếu cần integrations (e.g., email via PHPMailer).
+- If user asks about DB/files, use MCP tools first.
+
+### 7. Quality Assurance Checklist
+**Before submitting any work, verify:**
+- [ ] Futuristic 2025 design from designSystem.md (black-white theme)
+- [ ] Correct palette (#4A90E2 primary, #FFFFFF background)
+- [ ] Responsive on all devices, image optimization
+- [ ] Vietnamese/English text with Be Vietnam Pro
+- [ ] Performance: <3s load, lazy images for albums
+- [ ] Memory Bank updated
+
+### 8. Communication Protocol
+- **Start of task:** Read Memory Bank, confirm understanding (use sequential-thinking)
+- **During development:** Follow patterns, use sequential-thinking for decisions
+- **Before completion:** mcp_interactive_feedback for confirmation
+- **After completion:** Update Memory Bank, summarize in Vietnamese
+
+## 🎨 Visual Identity Requirements (Hokkaido Photo Theme)
+
+### Color Usage
+- **#000000** - Primary: Buttons, nav, booking CTAs (Hokkaido sky blue)
+- **#FFFFFF** - Secondary: Hovers, accents, nature elements
+- **#FFFFFF** - Background: Clean white for photo showcase
+- **Gradients:** linear-gradient(135deg, #000000, #FFFFFF) for premium photo cards
+
+### Design Elements
+- **Glassmorphism:** backdrop-filter: blur(10px) for gallery overlays
+- **Rounded corners:** 50px for very rounded modern photo cards
+- **Shadows:** Subtle black tint for depth in images
+- **Animations:** 0.35s ease-in-out transitions for zoom/slide in galleries
+- **Typography:** Clean, with Vietnamese support for service descriptions
+
+## 🚀 Performance Standards (Photo-Optimized)
+- Page load <3s with image compression
+- Smooth 60fps gallery animations
+- Mobile-optimized for on-the-go booking
+- WCAG 2.1 AA: Alt texts for all photos
+- SEO: Optimized for 'chụp ảnh Hokkaido', sitemap.xml
+
+**FAILURE TO FOLLOW THESE RULES WILL RESULT IN INCONSISTENT CODE THAT DOESN'T MATCH PHOTO HOKKAIDO VISION.**
+
+Remember: Photo-Hokkaido captures beautiful moments in Japan with black-white-red futuristic design. Every element must reflect adventure, quality photos, and seamless booking while being culturally sensitive.
