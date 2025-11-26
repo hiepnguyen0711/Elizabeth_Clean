@@ -1,10 +1,20 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
-    "name": "404",
-    "sections": {
-        "example-404": {
-            "type": "example-404"
-        }
-        
-    },
-    "order": ["example-404"]
-}  
+  "sections": {
+    "example-404": {
+      "type": "example-404",
+      "settings": {}
+    }
+  },
+  "order": [
+    "example-404"
+  ]
+}
