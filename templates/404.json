@@ -1,12 +1,10 @@
 {
-    "name": "Trang 404",
-    "layout": "custom_404",
-    "wrapper": "div#404-template",
+    "name": "404",
     "sections": {
-        "template-404": {
+        "example-404": {
             "type": "example-404"
         }
+        
     },
-    "order": ["template-404"]
-
-}
+    "order": ["example-404"]
+}  

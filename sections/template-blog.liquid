@@ -1,0 +1,35 @@
+{% paginate blog.articles by section.settings.articles_per_page %}
+  {% for article in blog.articles %}
+    {% if article.image %}
+      <img src="{{ article.image | img_url: 'medium' }}" alt="{{ article.title }}">
+    {% else %}
+      {{ 'image' | placeholder_svg_tag: 'w-20' }}
+    {% endif %}
+    <h2>{{ article.title }}</h2>
+    <p>{{ article.content | strip_html | truncatewords: 50 }}</p>
+    <a href="{{ article.url }}">{{ section.settings.button_read_more_text }}</a>
+  {% endfor %}
+  {{ paginate | default_pagination }}
+{% endpaginate %}
+
+{% schema %}
+  {
+    "name": "Cấu hình trang blog",
+    "settings": [
+      {
+        "type": "range",
+        "id": "articles_per_page",
+        "label": "Articles per page",
+        "min": 1,
+        "max": 100,
+        "step": 1,
+        "default": 3
+      }, {
+        "type": "text",
+        "id": "button_read_more_text",
+        "label": "Button read more text",
+        "default": "Read more"
+      }
+    ]
+  }
+{% endschema %}

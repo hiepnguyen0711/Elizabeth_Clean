@@ -1,0 +1,8 @@
+{
+    "sections": {
+        "template-main-page": {
+            "type": "template-main-page"
+        }
+    },
+    "order": ["template-main-page"]
+}

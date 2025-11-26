@@ -1,0 +1,9 @@
+{
+    "name": "Page History",
+    "sections": {
+        "template-main-page-history": {
+            "type": "template-main-page"
+        }
+    },
+    "order": ["template-main-page-history"]
+} 

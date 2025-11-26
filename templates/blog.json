@@ -1,0 +1,9 @@
+{
+    "name": "Trang blog",
+    "sections": {
+        "main-blog": {
+            "type": "template-blog"
+        }
+    },
+    "order": ["main-blog"]
+}

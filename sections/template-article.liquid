@@ -1,0 +1,144 @@
+{% for block in section.blocks %}
+  {% case block.type %}
+    {% when 'thumbnail' %}
+      <img
+        src="{{ article.image | img_url: 'large' }}"
+        alt="{{ article.image.alt | default: article.title }}"
+        width="1000"
+        height="1000">
+    {% when 'content' %}
+      <div>{{ article.content }}</div>
+    {% when 'title' %}
+      <h1>{{ article.title }}</h1>
+    {% when 'date' %}
+      {% if section.settings.show_date %}
+        <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}">
+          {{ article.published_at | date: '%Y-%m-%d' }}
+        </time>
+      {% endif %}
+    {% when 'author' %}
+      <div>
+        {% if section.settings.show_author %}
+          <p>{{ article.author }}</p>
+        {% endif %}
+      </div>
+  {% endcase %}
+{% endfor %}
+
+{% if blog.comments_enabled? %}
+  <div id="comments" class="comments">
+    {% if article.comments_count > 0 %}
+      {% paginate article.comments by 3 %}
+        {% for comment in article.comments %}
+          <div>
+            <p>{{ comment.author }}</p>
+            <p>{{ comment.created_at | date: '%Y-%m-%d' }}</p>
+            <p>{{ comment.content }}</p>
+          </div>
+        {% endfor %}
+        {% if paginate.pages > 1 %}
+          <div class="pagination">
+            {{ paginate | default_pagination | replace: '&laquo; Previous', '&laquo;' | replace: 'Next &raquo;', '&raquo;' }}
+          </div>
+        {% endif %}
+      {% endpaginate %}
+    {% else %}
+      <p>Không có bình luận</p>
+    {% endif %}
+  </div>
+
+  {% comment %} form comment {% endcomment %}
+  <div id="form-comment" class="form-comment">
+    {% form 'new_comment'
+      , article %}
+
+      {% comment %} Hiển thị lỗi nếu có {% endcomment %}
+      {% if form.errors %}
+        <div class="form-errors bg-red-500 text-white rounded-md p-2">
+          {% for field in form.errors %}
+            <p class="error">{{ field }}: {{ form.errors.messages[field] }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {% comment %} Hiển thị thông báo thành công {% endcomment %}
+      {% if form.posted_successfully? %}
+        <div class="form-success bg-green-500 text-white rounded-md p-2">
+          <p>Cảm ơn bạn đã bình luận! Bình luận của bạn đang chờ duyệt.</p>
+        </div>
+      {% endif %}
+
+      <div>
+        <label for="comment-name">Tên</label>
+        <input
+          id="comment-name"
+          name="comment[author]"
+          type="text"
+          class="comment-name input-text border border-gray-300 rounded-md p-2">
+      </div>
+      <div>
+        <label for="comment-email">Email</label>
+        <input
+          id="comment-email"
+          name="comment[email]"
+          type="email"
+          class="comment-email input-text border border-gray-300 rounded-md p-2">
+      </div>
+      <div>
+        <label for="comment-content">Nội dung</label>
+        <textarea
+          id="comment-content"
+          name="comment[body]"
+          class="comment-content input-text border border-gray-300 rounded-md p-2"></textarea>
+      </div>
+      <button type="submit" class="comment-submit button min-w-[200px] bg-black text-white rounded-md p-2">Gửi</button>
+    {% endform %}
+  </div>
+
+{% endif %}
+
+
+{% schema %}
+  {
+    "name": "Template Article",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_author",
+        "label": "Visible author",
+        "default": true
+      }, {
+        "type": "checkbox",
+        "id": "show_date",
+        "label": "Visible date",
+        "default": true
+      }
+    ],
+    "blocks": [
+      {
+        "type": "thumbnail",
+        "name": "Ảnh đại diện",
+        "limit": 1
+      },
+      {
+        "type": "content",
+        "name": "Content",
+        "limit": 1
+      },
+      {
+        "type": "title",
+        "name": "Title",
+        "limit": 1
+      },
+      {
+        "type": "date",
+        "name": "Date",
+        "limit": 1
+      }, {
+        "type": "author",
+        "name": "Author",
+        "limit": 1
+      }
+    ]
+  }
+{% endschema %}

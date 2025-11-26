@@ -1,0 +1,30 @@
+{
+  "name": "Trang bài viết chi tiết",
+  "sections": {
+    "main-article": {
+      "type": "template-article",
+      "blocks":{
+        "title-article": {
+            "type": "title"
+        },
+        "date-article": {
+            "type": "date"
+        },
+        "author-article": {
+            "type": "author"
+        },
+        "content-article": {
+            "type": "content"
+        },
+        "thumbnail-article": {
+            "type": "thumbnail"
+        }
+      },
+      "block_order": ["title-article", "date-article", "author-article", "content-article", "thumbnail-article"]
+    },
+    "main-content": {
+      "type": "content-article"
+    }
+  },
+  "order": ["main-article", "main-content"]
+}

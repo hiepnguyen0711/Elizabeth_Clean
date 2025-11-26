@@ -1,1 +1,51 @@
-1231231
+<div class="section-404__content">
+  <div class="flex-col items-center justify-center text-center space-y-4">
+    <h1 class="text-7xl font-bold text-black mb-0">{{ section.settings.title }}</h1>
+    <p class="text-lg text-black">{{ section.settings.subtext }}</p>
+    {% liquid
+      assign button_link = section.settings.button_link
+      if button_link == blank
+        assign button_link = shop.secure_url
+      endif
+    %}
+    <a href="{{ button_link }}" class="text-base text-white bg-black px-4 py-3 hover:bg-gray-800 transition-colors duration-300 rounded-md">
+      {{ section.settings.button_text }}
+    </a>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "404",
+    "tag": "section",
+    "class": "section-404 flex items-center justify-center h-screen",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Title",
+        "default": "Not found",
+        "info": "Enter the title for the 404 page"
+      }, {
+        "type": "text",
+        "id": "subtext",
+        "label": "Subtext",
+        "default": "The page you are looking for does not exist",
+        "info": "Enter the subtext for the 404 page"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button text",
+        "default": "Quay về cửa hàng",
+        "info": "Enter the text for the button"
+      }, {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link",
+        "default": "/",
+        "info": "Enter the link for the button"
+      }
+    ]
+  }
+{% endschema %}

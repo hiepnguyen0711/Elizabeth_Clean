@@ -1,0 +1,50 @@
+{% paginate collection.products by section.settings.grid_columns %}
+  {% if collection.products.size > 0 %}
+    <div class="product-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {% for product in collection.products %}
+        <div class="product-item relative col-span-1 bg-white p-4 rounded-lg border border-gray-200 rounded-md overflow-hidden">
+          {% unless product.available %}
+            <span class="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 rounded-md">Hết hàng</span>
+          {% endunless %}
+          <a href="{{ product.url | within: collection }}" class="block  overflow-hidden">
+            <img
+              loading="lazy"
+              src="{{ product.featured_image.src | img_url: 'large' }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              class="w-full h-full object-cover">
+          </a>
+          <div class="product-content flex flex-col gap-2">
+            <a href="{{ product.url | within: collection }}" class="text-lg font-medium text-black">{{ product.title }}</a>
+            <div class="text-sm text-gray-500">
+              <span class="line-through text-gray-500">{{ product.price | money }}</span>
+              <span class="text-red-500">{{ product.price | money_without_trailing_zeros }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p>Không có sản phẩm nào</p>
+  {% endif %}
+  {% if paginate.pages > 1 %}
+    {{ paginate | default_pagination }}
+  {% endif %}
+{% endpaginate %}
+
+
+{% schema %}
+  {
+    "name": "Settings Collection",
+    "settings": [
+      {
+        "type": "range",
+        "id": "grid_columns",
+        "label": "Số cột",
+        "min": 1,
+        "max": 3,
+        "step": 1,
+        "default": 3
+      }
+    ]
+  }
+{% endschema %}

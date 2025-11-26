@@ -1,0 +1,128 @@
+<h1 class="text-2xl font-bold text-center mb-4">Giỏ hàng</h1>
+{% if cart.item_count >= 0 %}
+  <form
+    action="{{ routes.cart_url }}"
+    method="post"
+    novalidate
+    class="max-w-screen-lg mx-auto">
+    <table class="w-full text-left">
+      <thead>
+        <tr class="border-b border-gray-200">
+          <th class="text-left p-4 font-bold">Product</th>
+          <th class="text-left p-4 font-bold">Price</th>
+          <th class="text-left p-4 font-bold">Quantity</th>
+          <th class="text-left p-4 font-bold">Total</th>
+          <th class="text-left p-4 font-bold"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in cart.items %}
+          <tr class="border-b border-gray-200">
+            <td class="p-4">
+              <div class="flex items-center gap-2">
+                <img
+                  src="{{ item.variant.featured_image | img_url: 'medium' }}"
+                  alt="{{ item.title }}"
+                  class="w-16 h-16 object-cover">
+                <div class="flex flex-col">
+                  {{ item.product.title }}
+                  <span class="text-sm text-gray-500">{{ item.variant.title }}</span>
+                </div>
+              </div>
+            </td>
+            <td class="p-4">{{ item.price | money }}</td>
+            <td class="p-4">
+              <div class="flex items-center gap-2">
+                <input
+                  class="w-16 text-center"
+                  type="number"
+                  name="updates[]"
+                  data-id="{{ item.id }}"
+                  value="{{ item.quantity }}"
+                  min="1"
+                  id="updates_{{ item.id }}">
+              </div>
+            </td>
+            <td class="p-4">{{ item.price | times: item.quantity | money }}</td>
+            <td class="p-4">
+              <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="text-red-500">Remove</a>
+            </td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% for block in section.blocks %}
+      {% case block.type %}
+        {% when 'sub_total' %}
+          <h3 class="text-lg font-bold my-4 text-right text-red-500">{{ block.settings.subtotal_text }}: {{ cart.total_price | money }}</h3>
+        {% when 'btn_update' %}
+          <button
+            type="submit"
+            name="update"
+            class="bg-black text-white px-4 py-2 rounded-md cursor-pointer">{{ block.settings.button_update_text }}</button>
+
+        {% when 'btn_checkout' %}
+          <button
+            type="submit"
+            name="checkout"
+            class="bg-black text-white px-4 py-2 rounded-md cursor-pointer">{{ block.settings.button_checkout_text }}</button>
+      {% endcase %}
+    {% endfor %}
+  </form>
+{% else %}
+  <p class="text-center text-2xl font-bold">{{ section.settings.cart_empty_text }}</p>
+  <a href="{{ routes.all_products_collection_url }}" class="text-white max-w-64 mx-auto bg-black px-4 py-2 rounded-md text-center block mx-auto mt-4">Continue shopping</a>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Cart config",
+    "settings": [
+      {
+        "type": "text",
+        "id": "cart_empty_text",
+        "label": "Cart empty text",
+        "default": "Your cart is empty"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "btn_update",
+        "name": "Button update",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "button_update_text",
+            "label": "Button update text",
+            "default": "Update"
+          }
+        ]
+      }, {
+        "type": "btn_checkout",
+        "name": "Button checkout",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "button_checkout_text",
+            "label": "Button checkout text",
+            "default": "Checkout"
+          }
+        ]
+      }, {
+        "type": "sub_total",
+        "name": "Subtotal",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "subtotal_text",
+            "label": "Subtotal text",
+            "default": "Subtotal"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

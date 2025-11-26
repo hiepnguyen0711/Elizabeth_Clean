@@ -1,0 +1,9 @@
+{
+    "name": "Page Contact",
+    "sections": {
+        "template-main-page-contact": {
+            "type": "template-main-page"
+        }
+    },
+    "order": ["template-main-page-contact"]
+}
